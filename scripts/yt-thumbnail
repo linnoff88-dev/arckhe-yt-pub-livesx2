@@ -94,7 +94,7 @@ def _get_llm_chain():
                       'url': AGNES_URL, 'api_key': AGNES_API_KEY})
     return chain
 
-BRAND = os.environ.get('THUMB_BRAND', 'INEMA TDS')
+BRAND = os.environ.get('THUMB_BRAND', 'ARCKHÉ TDS')
 WIDTH = 1280
 HEIGHT = 720
 FONT_PATH = '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'
@@ -112,7 +112,7 @@ def hex_to_rgb(hex_color):
     hex_color = hex_color.lstrip('#')
     return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
 
-DEFAULT_SYSTEM_PROMPT = """Voce e especialista na criacao de prompts para geracao de thumbnails de YouTube para o canal INEMA TDS (canal de tecnologia, programacao, IA e automacao).
+DEFAULT_SYSTEM_PROMPT = """Voce e especialista na criacao de prompts para geracao de thumbnails de YouTube para o canal ARCKHÉ TDS (canal de tecnologia, programacao, IA e automacao).
 
 Sua missao e transformar qualquer titulo de video em um prompt detalhado, otimizado para alta taxa de cliques (CTR) e pronto para uso em geradores de imagem.
 
@@ -124,7 +124,7 @@ Checklist:
 5) Pense na composicao: espaco para texto, foco visual, alto contraste.
 
 Diretrizes:
-- Estilo: fotorealista com iluminacao cinematica, alto contraste
+- Estilo: fotorealista com iluminacao cARCKHÉtica, alto contraste
 - Cores: vibrantes, contrastantes (neon azul, roxo, laranja, vermelho)
 - Proporcao: 16:9 (1792x1024)
 - A frase curta NAO e o titulo completo, e uma versao impactante de 2-5 palavras
@@ -258,12 +258,12 @@ def build_image_prompt(prompt_data):
     """Monta o prompt final para o gerador de imagem."""
     return (
         f'IMPORTANT: DO NOT include any text, letters, words or writing in the image. '
-        f'Professional YouTube thumbnail, photorealistic, cinematic lighting. '
+        f'Professional YouTube thumbnail, photorealistic, cARCKHÉtic lighting. '
         f'Scene: {prompt_data["cena_principal"]}. '
         f'Background: {prompt_data["fundo_tematico"]}. '
         f'Color scheme: {prompt_data["cores_dominantes"]}. '
         f'Composition: {prompt_data["composicao"]}. '
-        f'Style: Realistic photo with cinematic lighting, high contrast, dramatic shadows, '
+        f'Style: Realistic photo with cARCKHÉtic lighting, high contrast, dramatic shadows, '
         f'optimized for YouTube thumbnail. Aspect ratio 16:9. '
         f'NO TEXT IN IMAGE. '
         f'Do not include: text, letters, words, writing, {prompt_data["negative_prompt"]}'
@@ -276,9 +276,9 @@ MINIMAX_API_KEY = os.environ.get('MINIMAX_API_KEY', '')
 MINIMAX_URL = 'https://api.minimax.io/v1'
 GOOGLE_API_KEY = os.environ.get('GOOGLE_IMAGE_API_KEY', '') or os.environ.get('GEMINI_API_KEY', '')
 GOOGLE_IMAGE_MODEL = os.environ.get('GOOGLE_IMAGE_MODEL', 'imagen-4.0-fast-generate-001')
-INEMAIMG_URL = os.environ.get('INEMAIMG_URL', 'http://localhost:8000')
-INEMAIMG_MODEL_DEFAULT = 'flux2-klein'
-INEMAIMG_TIMEOUT = int(os.environ.get('INEMAIMG_TIMEOUT_S', '1800'))
+ARCKHÉIMG_URL = os.environ.get('ARCKHÉIMG_URL', 'http://localhost:8000')
+ARCKHÉIMG_MODEL_DEFAULT = 'flux2-klein'
+ARCKHÉIMG_TIMEOUT = int(os.environ.get('ARCKHÉIMG_TIMEOUT_S', '1800'))
 
 # Image provider config from env
 IMAGE_PROVIDER = os.environ.get('THUMB_IMAGE_PROVIDER', 'agnes')
@@ -351,7 +351,7 @@ def _generate_image_kie(image_prompt):
             short_prompt = '. '.join(parts[:3])[:400]
             if not short_prompt.endswith('.'):
                 short_prompt += '.'
-            short_prompt += ' Photorealistic, cinematic, 16:9. DO NOT include any text, letters or words in the image.'
+            short_prompt += ' Photorealistic, cARCKHÉtic, 16:9. DO NOT include any text, letters or words in the image.'
         payload = {
             'model': model,
             'input': {
@@ -450,9 +450,9 @@ def _generate_image_minimax(image_prompt):
 
 
 def _generate_image_local(image_prompt):
-    """Gera imagem via inemaimg local (FastAPI em INEMAIMG_URL, padrao do imkt4/timesmkt3)."""
+    """Gera imagem via ARCKHÉimg local (FastAPI em ARCKHÉIMG_URL, padrao do imkt4/timesmkt3)."""
     import base64 as b64
-    model = IMAGE_MODEL or INEMAIMG_MODEL_DEFAULT
+    model = IMAGE_MODEL or ARCKHÉIMG_MODEL_DEFAULT
     # 1024x576 = 16:9 exato e multiplos de 64 (requisito do servidor)
     payload = {
         'model': model,
@@ -461,14 +461,14 @@ def _generate_image_local(image_prompt):
         'height': 576,
     }
     body = json.dumps(payload).encode()
-    req = urllib.request.Request(f'{INEMAIMG_URL}/generate', data=body)
+    req = urllib.request.Request(f'{ARCKHÉIMG_URL}/generate', data=body)
     req.add_header('Content-Type', 'application/json')
 
-    resp = urllib.request.urlopen(req, timeout=INEMAIMG_TIMEOUT)
+    resp = urllib.request.urlopen(req, timeout=ARCKHÉIMG_TIMEOUT)
     result = json.loads(resp.read())
     img_b64 = result.get('image')
     if not img_b64:
-        raise ValueError(f'inemaimg nao retornou image. keys={list(result.keys())}')
+        raise ValueError(f'ARCKHÉimg nao retornou image. keys={list(result.keys())}')
     return b64.b64decode(img_b64)
 
 
@@ -577,7 +577,7 @@ PRESETS = {
     'tutorial': {'DESIGN_FONT':'montserrat-extrabold','DESIGN_FONT_SIZE':'80','DESIGN_LAST_LINE_SCALE':'0','DESIGN_LINE_HEIGHT':'90','DESIGN_TRACKING':'tight','DESIGN_CASE':'upper','DESIGN_TEXT_COLOR':'#FFFFFF','DESIGN_HIGHLIGHT_COLOR':'#4CAF50','DESIGN_HIGHLIGHT_ENABLED':'true','DESIGN_ACCENT_COLOR':'#4CAF50','DESIGN_ACCENT_WIDTH':'250','DESIGN_ACCENT_HEIGHT':'5','DESIGN_ACCENT_GAP':'30','DESIGN_ACCENT_ENABLED':'true','DESIGN_SHADOW_TYPE':'outline','DESIGN_SHADOW_COLOR':'#1B5E20','DESIGN_SHADOW_SIZE':'3','DESIGN_SHADOW_OPACITY':'220','DESIGN_GRADIENT':'top','DESIGN_GRADIENT_OPACITY':'140','DESIGN_GRADIENT_COVERAGE':'35','DESIGN_BRAND_FONT':'montserrat-extrabold','DESIGN_BRAND_SIZE':'26','DESIGN_BRAND_COLOR':'#4CAF50','DESIGN_BRAND_POSITION':'bottom-left','DESIGN_POSITION':'top-left'},
     'breaking': {'DESIGN_FONT':'anton','DESIGN_FONT_SIZE':'94','DESIGN_LAST_LINE_SCALE':'0','DESIGN_LINE_HEIGHT':'100','DESIGN_TRACKING':'normal','DESIGN_CASE':'upper','DESIGN_TEXT_COLOR':'#FFEB3B','DESIGN_HIGHLIGHT_COLOR':'#FF5722','DESIGN_HIGHLIGHT_ENABLED':'true','DESIGN_ACCENT_COLOR':'#FF5722','DESIGN_ACCENT_WIDTH':'250','DESIGN_ACCENT_HEIGHT':'5','DESIGN_ACCENT_GAP':'30','DESIGN_ACCENT_ENABLED':'true','DESIGN_SHADOW_TYPE':'outline','DESIGN_SHADOW_COLOR':'#000000','DESIGN_SHADOW_SIZE':'4','DESIGN_SHADOW_OPACITY':'255','DESIGN_GRADIENT':'full-bottom','DESIGN_GRADIENT_OPACITY':'200','DESIGN_GRADIENT_COVERAGE':'50','DESIGN_BRAND_FONT':'anton','DESIGN_BRAND_SIZE':'28','DESIGN_BRAND_COLOR':'#FFEB3B','DESIGN_BRAND_POSITION':'bottom-left','DESIGN_POSITION':'bottom-left'},
     'minimal': {'DESIGN_FONT':'montserrat-extrabold','DESIGN_FONT_SIZE':'68','DESIGN_LAST_LINE_SCALE':'0','DESIGN_LINE_HEIGHT':'80','DESIGN_TRACKING':'very-tight','DESIGN_CASE':'upper','DESIGN_TEXT_COLOR':'#1A1A1A','DESIGN_HIGHLIGHT_COLOR':'#1A1A1A','DESIGN_HIGHLIGHT_ENABLED':'false','DESIGN_ACCENT_COLOR':'#E0E0E0','DESIGN_ACCENT_WIDTH':'250','DESIGN_ACCENT_HEIGHT':'5','DESIGN_ACCENT_GAP':'30','DESIGN_ACCENT_ENABLED':'false','DESIGN_SHADOW_TYPE':'none','DESIGN_SHADOW_COLOR':'#000000','DESIGN_SHADOW_SIZE':'0','DESIGN_SHADOW_OPACITY':'0','DESIGN_GRADIENT':'left','DESIGN_GRADIENT_OPACITY':'200','DESIGN_GRADIENT_COVERAGE':'50','DESIGN_BRAND_FONT':'montserrat-extrabold','DESIGN_BRAND_SIZE':'22','DESIGN_BRAND_COLOR':'#9E9E9E','DESIGN_BRAND_POSITION':'bottom-left','DESIGN_POSITION':'center-left'},
-    'cinematic': {'DESIGN_FONT':'montserrat-black','DESIGN_FONT_SIZE':'80','DESIGN_LAST_LINE_SCALE':'0','DESIGN_LINE_HEIGHT':'88','DESIGN_TRACKING':'tight','DESIGN_CASE':'upper','DESIGN_TEXT_COLOR':'#F5A623','DESIGN_HIGHLIGHT_COLOR':'#00C2C7','DESIGN_HIGHLIGHT_ENABLED':'true','DESIGN_ACCENT_COLOR':'#F5A623','DESIGN_ACCENT_WIDTH':'250','DESIGN_ACCENT_HEIGHT':'5','DESIGN_ACCENT_GAP':'30','DESIGN_ACCENT_ENABLED':'true','DESIGN_SHADOW_TYPE':'blur','DESIGN_SHADOW_COLOR':'#000000','DESIGN_SHADOW_SIZE':'10','DESIGN_SHADOW_OPACITY':'200','DESIGN_GRADIENT':'top-left','DESIGN_GRADIENT_OPACITY':'180','DESIGN_GRADIENT_COVERAGE':'50','DESIGN_BRAND_FONT':'montserrat-extrabold','DESIGN_BRAND_SIZE':'24','DESIGN_BRAND_COLOR':'#F5A623','DESIGN_BRAND_POSITION':'bottom-left','DESIGN_POSITION':'bottom-left'},
+    'cARCKHÉtic': {'DESIGN_FONT':'montserrat-black','DESIGN_FONT_SIZE':'80','DESIGN_LAST_LINE_SCALE':'0','DESIGN_LINE_HEIGHT':'88','DESIGN_TRACKING':'tight','DESIGN_CASE':'upper','DESIGN_TEXT_COLOR':'#F5A623','DESIGN_HIGHLIGHT_COLOR':'#00C2C7','DESIGN_HIGHLIGHT_ENABLED':'true','DESIGN_ACCENT_COLOR':'#F5A623','DESIGN_ACCENT_WIDTH':'250','DESIGN_ACCENT_HEIGHT':'5','DESIGN_ACCENT_GAP':'30','DESIGN_ACCENT_ENABLED':'true','DESIGN_SHADOW_TYPE':'blur','DESIGN_SHADOW_COLOR':'#000000','DESIGN_SHADOW_SIZE':'10','DESIGN_SHADOW_OPACITY':'200','DESIGN_GRADIENT':'top-left','DESIGN_GRADIENT_OPACITY':'180','DESIGN_GRADIENT_COVERAGE':'50','DESIGN_BRAND_FONT':'montserrat-extrabold','DESIGN_BRAND_SIZE':'24','DESIGN_BRAND_COLOR':'#F5A623','DESIGN_BRAND_POSITION':'bottom-left','DESIGN_POSITION':'bottom-left'},
     'gradient': {'DESIGN_FONT':'montserrat-black','DESIGN_FONT_SIZE':'84','DESIGN_LAST_LINE_SCALE':'0','DESIGN_LINE_HEIGHT':'92','DESIGN_TRACKING':'tight','DESIGN_CASE':'upper','DESIGN_TEXT_COLOR':'#BF00FF','DESIGN_HIGHLIGHT_COLOR':'#FF007F','DESIGN_HIGHLIGHT_ENABLED':'true','DESIGN_ACCENT_COLOR':'#8B00FF','DESIGN_ACCENT_WIDTH':'250','DESIGN_ACCENT_HEIGHT':'5','DESIGN_ACCENT_GAP':'30','DESIGN_ACCENT_ENABLED':'true','DESIGN_SHADOW_TYPE':'blur','DESIGN_SHADOW_COLOR':'#4A0080','DESIGN_SHADOW_SIZE':'8','DESIGN_SHADOW_OPACITY':'150','DESIGN_GRADIENT':'top-left','DESIGN_GRADIENT_OPACITY':'160','DESIGN_GRADIENT_COVERAGE':'40','DESIGN_BRAND_FONT':'montserrat-extrabold','DESIGN_BRAND_SIZE':'24','DESIGN_BRAND_COLOR':'#BF00FF','DESIGN_BRAND_POSITION':'bottom-left','DESIGN_POSITION':'top-left'},
     'splitscreen': {'DESIGN_FONT':'anton','DESIGN_FONT_SIZE':'88','DESIGN_LAST_LINE_SCALE':'0','DESIGN_LINE_HEIGHT':'94','DESIGN_TRACKING':'normal','DESIGN_CASE':'upper','DESIGN_TEXT_COLOR':'#FFFFFF','DESIGN_HIGHLIGHT_COLOR':'#FFE135','DESIGN_HIGHLIGHT_ENABLED':'false','DESIGN_ACCENT_COLOR':'#FFFFFF','DESIGN_ACCENT_WIDTH':'250','DESIGN_ACCENT_HEIGHT':'5','DESIGN_ACCENT_GAP':'30','DESIGN_ACCENT_ENABLED':'false','DESIGN_SHADOW_TYPE':'outline','DESIGN_SHADOW_COLOR':'#000000','DESIGN_SHADOW_SIZE':'4','DESIGN_SHADOW_OPACITY':'255','DESIGN_GRADIENT':'none','DESIGN_GRADIENT_OPACITY':'0','DESIGN_GRADIENT_COVERAGE':'0','DESIGN_BRAND_FONT':'anton','DESIGN_BRAND_SIZE':'26','DESIGN_BRAND_COLOR':'#FFFFFF','DESIGN_BRAND_POSITION':'bottom-left','DESIGN_POSITION':'center'},
     'colorpop': {'DESIGN_FONT':'montserrat-extrabold','DESIGN_FONT_SIZE':'78','DESIGN_LAST_LINE_SCALE':'0','DESIGN_LINE_HEIGHT':'88','DESIGN_TRACKING':'tight','DESIGN_CASE':'upper','DESIGN_TEXT_COLOR':'#FF1C1C','DESIGN_HIGHLIGHT_COLOR':'#FFFFFF','DESIGN_HIGHLIGHT_ENABLED':'true','DESIGN_ACCENT_COLOR':'#FF1C1C','DESIGN_ACCENT_WIDTH':'250','DESIGN_ACCENT_HEIGHT':'5','DESIGN_ACCENT_GAP':'30','DESIGN_ACCENT_ENABLED':'true','DESIGN_SHADOW_TYPE':'outline','DESIGN_SHADOW_COLOR':'#000000','DESIGN_SHADOW_SIZE':'3','DESIGN_SHADOW_OPACITY':'200','DESIGN_GRADIENT':'left','DESIGN_GRADIENT_OPACITY':'140','DESIGN_GRADIENT_COVERAGE':'40','DESIGN_BRAND_FONT':'montserrat-extrabold','DESIGN_BRAND_SIZE':'24','DESIGN_BRAND_COLOR':'#FF1C1C','DESIGN_BRAND_POSITION':'bottom-left','DESIGN_POSITION':'top-left'},

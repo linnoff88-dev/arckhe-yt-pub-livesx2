@@ -58,14 +58,14 @@ O problema e o que esta em volta deles.
 
 | projeto | o que e | estado | licao pra v2 |
 |---|---|---|---|
-| **inemars** (`imkt4`) | "Hub de publicacao multi-rede, multi-tenant": FastAPI + Redis + MinIO + KMS + Blotato + adapters nativos, roadmap F0–F6 | scaffold; adapters de 100–140 linhas em `DRY_RUN` quando falta credencial | a **ideia** (publisher stateless, `PublishFailure(retriable)`, "provider nunca consulta DB") e boa e foi copiada. A **infra** (Redis, MinIO, multi-tenant) e o motivo de nao ter saido do papel. v2 usa SQLite e stdlib. |
+| **ARCKHÉrs** (`imkt4`) | "Hub de publicacao multi-rede, multi-tenant": FastAPI + Redis + MinIO + KMS + Blotato + adapters nativos, roadmap F0–F6 | scaffold; adapters de 100–140 linhas em `DRY_RUN` quando falta credencial | a **ideia** (publisher stateless, `PublishFailure(retriable)`, "provider nunca consulta DB") e boa e foi copiada. A **infra** (Redis, MinIO, multi-tenant) e o motivo de nao ter saido do papel. v2 usa SQLite e stdlib. |
 | **imkt5** | plataforma de workers HTTP por capability (`yt-publish`, `yt-source-ingest`) com gateway conversacional | workers existem, mesma dependencia de fila externa | mesmo padrao: generalizou antes de publicar |
 | **timesmkt / imkt4 `publish_now.js`** | 456 linhas JS: `publishInstagram`, `publishThreads`, `publishYouTube` lendo `CREDENTIALS` de JSON | funciona por lote, sem fila, sem retry | e o "publicar direto" mais simples da casa. v2 tem o equivalente em `./hub publicar --agora`, com fila e retry por cima. |
 | **pubmetricool** | publicar Reels/TikTok via MCP da Metricool a partir do `publicados` do livesx | testado ponta a ponta 1 vez (19-ago); doc propria conclui: **daemon nao fala MCP** e **volume nao cabe no plano Free** | Metricool nao e backend de daemon. YouTube fica nativo. TikTok/Instagram entram como publisher separado quando houver API/plano — a interface ja existe (`lib/youtube.py` e o modelo). |
 | **tktk-sync / tktk** | copia do livesx (scheduler 300 + dashboard 597) que scaneia TikTok, baixa e sobe no YouTube | funcional, hoje absorvido como `tiktok_scanner.py` dentro do livesx | e um **produtor de fila** (poe MP4 + metadados). Em v2 e so escrever em `entrada/<canal>/`. |
 | **yt-pub-lives-thumb** | gerador de thumbnail standalone com n8n (`workflow_yt_thumb.json`) | virou `scripts/yt-thumbnail` | nada a fazer |
 
-Padrao: **cada tentativa de "sistema geral" (inemars, imkt5) travou na infraestrutura; cada coisa que
+Padrao: **cada tentativa de "sistema geral" (ARCKHÉrs, imkt5) travou na infraestrutura; cada coisa que
 publica de verdade (livesx, publish_now.js) e um script simples com credencial em arquivo.** A v2 fica do
 lado dos scripts simples e resolve so o que faltava: fila com estado, 1 processo, 1 painel, aviso de erro.
 
@@ -74,7 +74,7 @@ lado dos scripts simples e resolve so o que faltava: fila com estado, 1 processo
 | alternativa | por que nao |
 |---|---|
 | Refatorar o v1 no lugar (tirar loops, unir dashboards) | 17 copias em producao; cada mudanca = sync + 34 restarts + risco de `.env`. Precisa de um lugar novo pra migrar canal a canal. |
-| Terminar o inemars (Redis, MinIO, multi-tenant) | so ha um tenant (INEMA). Redis/MinIO sao 2 servicos a mais pra um problema que SQLite + pasta resolvem. |
+| Terminar o ARCKHÉrs (Redis, MinIO, multi-tenant) | so ha um tenant (ARCKHÉ). Redis/MinIO sao 2 servicos a mais pra um problema que SQLite + pasta resolvem. |
 | Metricool/Blotato/Zernio como publicador unico | custo por post, sem chamada de daemon (MCP), cota mensal < volume (12k videos). YouTube nativo e gratis via OAuth. |
 | n8n / Make orquestrando | ja existe `docs/import-worker-spec.md` mostrando o n8n como **produtor** (poe manifest na pasta). Isso continua valendo: n8n escreve em `entrada/`, hub publica. Orquestrar o upload de 2 GB no n8n e pior. |
 | Um scheduler por canal, mas compartilhando codigo (symlink) | resolve so o sync; continua 35 processos, 18 portas, N bancos, notifier lendo banco alheio. |

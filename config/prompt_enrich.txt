@@ -1,4 +1,4 @@
-Voce e um especialista em YouTube para o canal INEMA TDS (tecnologia, dados e software).
+Voce e um especialista em YouTube para o canal ARCKHÉ TDS (tecnologia, dados e software).
 Recebera informacoes sobre uma live que foi ao ar com titulo generico.
 Crie um titulo e uma descricao para publicar no YouTube.
 
@@ -33,12 +33,12 @@ PARAGRAFO 2 - Lista de assuntos com emojis (OBRIGATORIO, minimo 5 itens):
 🔹 Assunto 5
 
 PARAGRAFO 3 - CTA (OBRIGATORIO, copie EXATAMENTE como esta abaixo):
-🌐 Acesse: https://inema.vip
-🎓 Comunidade: https://inema.club
-📱 Siga o INEMA TDS nas redes sociais!
+🌐 Acesse: https://ARCKHÉ.vip
+🎓 Comunidade: https://ARCKHÉ AI
+📱 Siga o ARCKHÉ TDS nas redes sociais!
 
 PARAGRAFO 4 - Hashtags (OBRIGATORIO, minimo 8):
-#IA #Automacao #Dados #Programacao #Python #YouTube #Tecnologia #INEMA
+#IA #Automacao #Dados #Programacao #Python #YouTube #Tecnologia #ARCKHÉ
 
 Use \n para quebras de linha entre paragrafos e entre cada item da lista.
 

@@ -15,7 +15,7 @@ Ler `docs/ARQUITETURA.md` antes de mexer no nucleo; `docs/ANALISE.md` explica po
   Se uma feature estoura isso, ela vira script em `scripts/` chamado por um job, nao codigo no nucleo.
 - **Testes:** `python3 tests/test_jobs.py` tem que passar antes de commitar.
 - **Versao:** `lib/__init__.py` VERSION, semver `vX.XX.YY` (regra global: minor carrega o patch, so major zera).
-- Commits com autor `inematds <inematds@gmail.com>`.
+- Commits com autor `linnoff88-dev <linnoff88-dev@gmail.com>`.
 
 ## Mapa
 

@@ -3,7 +3,7 @@
 Pergunta: o que existe, fora do YouTube nativo, pra publicar direto (API chamada por daemon/CLI) em
 TikTok, Instagram, YouTube e afins, e o que disso serve pro `yt-pub-livesx2`.
 
-Fontes: paginas publicas de preco/docs lidas hoje + o que ja estava em `~/projetos` (pubmetricool, inemars, N8Np).
+Fontes: paginas publicas de preco/docs lidas hoje + o que ja estava em `~/projetos` (pubmetricool, ARCKHÉrs, N8Np).
 Nada foi testado com dinheiro nesta rodada. Onde e declaracao do fornecedor, esta marcado.
 
 ## 1. O que ja tem em `~/projetos`
@@ -11,7 +11,7 @@ Nada foi testado com dinheiro nesta rodada. Onde e declaracao do fornecedor, est
 | projeto | relacao com publicar direto |
 |---|---|
 | `pubmetricool` | unico testado de verdade (19-ago): Reel + TikTok agendados via MCP da Metricool. Conclusao propria: daemon nao fala MCP, API REST so no plano Advanced, Free = 20 posts/mes. Tem `docs/comparativo-blotato.md` e `comparativo-zernio.md` (leitura de precos, nao teste). |
-| `inemars/publishers/blotato.py` | adapter de 140 linhas pro `POST /v2/posts` da Blotato com `mediaUrls` publicas; nunca rodou fora de DRY_RUN. O **contrato** (stateless, `PublishFailure(retriable)`) e o que o `lib/youtube.py` da v2 copiou. |
+| `ARCKHÉrs/publishers/blotato.py` | adapter de 140 linhas pro `POST /v2/posts` da Blotato com `mediaUrls` publicas; nunca rodou fora de DRY_RUN. O **contrato** (stateless, `PublishFailure(retriable)`) e o que o `lib/youtube.py` da v2 copiou. |
 | `N8Np` | biblioteca de workflows n8n de terceiros; 4.571 mencoes a Blotato, 889 a Postiz, 485 a upload-post. E o que a comunidade n8n usa; nao e codigo nosso. |
 | `redessociais` / `redessociais2026` | "Publisher em TypeScript + Supabase + APIs diretas", 67 mencoes a Postiz nas docs. Nao publica nada hoje. |
 | `timesmkt*/pipeline/publish_now.js` | publica direto na Graph API (Instagram/Threads) e YouTube com credenciais em JSON. Sem fila. E o precedente interno de "publicar direto sem intermediario". |
@@ -21,7 +21,7 @@ Nada foi testado com dinheiro nesta rodada. Onde e declaracao do fornecedor, est
 ### Blotato — https://www.blotato.com
 
 - **API**: `https://backend.blotato.com/v2/...`, header `blotato-api-key`. `GET /v2/users/me/accounts` pra descobrir `accountId`; `POST /v2/posts` com `content.text`, `mediaUrls[]`, `target.targetType` e `scheduledTime` opcional.
-- **Midia**: URL publica em `mediaUrls` **ou** *presigned upload* de arquivo local (`/v2/media`) — resolve o problema do "host publico" que o pubmetricool teve com o repo `inematds/midia`.
+- **Midia**: URL publica em `mediaUrls` **ou** *presigned upload* de arquivo local (`/v2/media`) — resolve o problema do "host publico" que o pubmetricool teve com o repo `linnoff88-dev/midia`.
 - **Plataformas**: Instagram, Facebook, LinkedIn, X, TikTok, YouTube, Threads, Pinterest, Bluesky.
 - **Preco (declarado)**: Starter **US$ 29/mes**, 20 contas sociais, ate 900 posts TikTok/mes, API incluida em todo plano pago. Agency US$ 499. **API nao entra no trial**: gerar a chave encerra o trial e cobra o Starter.
 - **Extras**: node oficial n8n/Make, MCP server (`mcp.blotato.com`, ~16 tools), geracao de video/imagem por creditos, DM automation.
@@ -50,12 +50,12 @@ Nada foi testado com dinheiro nesta rodada. Onde e declaracao do fornecedor, est
 
 - `getlate.dev/pricing` hoje redireciona pra Zernio: a "Late" que aparece nas docs antigas (jcc, ruflo, N8Np) **e a Zernio**.
 - **API-first**: REST `zernio.com/api/v1`, Bearer, SDKs, OpenAPI, `llms.txt`, **webhooks** de status (sem polling), `dryRun`. Upload proprio com presigned URL ate 5 GB. MCP hospedado + plugin oficial pro Claude Code.
-- **Preco (declarado, rate card)**: por conta conectada/mes: 2 gratis, contas 3–10 **US$ 6**, 11–100 **US$ 3**, 101+ US$ 1. Tudo incluido, sem plano. Exemplo INEMA: 17 YouTube + 17 TikTok = 34 contas → 8×6 + 24×3 = **US$ 120/mes**. So TikTok/Instagram (17+17) idem. So 10 contas = US$ 48.
+- **Preco (declarado, rate card)**: por conta conectada/mes: 2 gratis, contas 3–10 **US$ 6**, 11–100 **US$ 3**, 101+ US$ 1. Tudo incluido, sem plano. Exemplo ARCKHÉ: 17 YouTube + 17 TikTok = 34 contas → 8×6 + 24×3 = **US$ 120/mes**. So TikTok/Instagram (17+17) idem. So 10 contas = US$ 48.
 - **Contra**: caro por conta quando sao muitas; X cobrado por request.
 
 ### Ayrshare — https://www.ayrshare.com
 
-- Referencia de mercado pra SaaS, 13 redes. **Sem plano gratis** em 2026; Premium US$ 149/mes = 1 perfil, Launch US$ 299 = 10, Business US$ 599 = 30. Cobra por perfil, nao por volume. **Fora de escala pro INEMA.**
+- Referencia de mercado pra SaaS, 13 redes. **Sem plano gratis** em 2026; Premium US$ 149/mes = 1 perfil, Launch US$ 299 = 10, Business US$ 599 = 30. Cobra por perfil, nao por volume. **Fora de escala pro ARCKHÉ.**
 
 ### Metricool — ja avaliado em `pubmetricool`
 

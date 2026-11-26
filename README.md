@@ -13,7 +13,7 @@ sem os 35 processos, 18 portas e 17 copias do codigo.
 
 ## ðŸ“– Guia de uso
 
-Guia completo (landing + passo a passo): **https://inematds.github.io/yt-pub-livesx2/guia/**
+Guia completo (landing + passo a passo): **https://linnoff88-dev.github.io/arckhe-/guia/**
 
 ## Em 60 segundos
 
@@ -66,7 +66,7 @@ tests/test_jobs.py     15 testes sem rede
 ```yaml
 # canais/lives8.yaml â€” gerado pelo importar-historico; edite a vontade, o hub recarrega sozinho
 destino_id: UCJxL11aomXJiBZga-JXylgQ
-destino_nome: Inema Vibe
+destino_nome: ARCKHÉ Vibe
 config_dir: /home/nmaldaner/projetos/yt-pub-lives8/config   # .env + credentials.enc ficam AQUI
 horarios: ["08:10", "16:10"]                                 # 1 clip da fila por horario
 privacy: public
