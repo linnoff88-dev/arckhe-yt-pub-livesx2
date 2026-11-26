@@ -1,6 +1,6 @@
-﻿# yt-pub-livesx2
+# yt-pub-livesx2
 
-**ðŸ‡§ðŸ‡· [PortuguÃªs](README.md) Â· ðŸ‡ºðŸ‡¸ [English](README.en.md) Â· ðŸ‡ªðŸ‡¸ [EspaÃ±ol](README.es.md)**
+**ðŸ‡§ðŸ‡· [Português](README.md) Â· ðŸ‡ºðŸ‡¸ [English](README.en.md) Â· ðŸ‡ªðŸ‡¸ [Espaê±ol](README.es.md)**
 
 Publicador de videos no YouTube para N canais: **1 daemon, 1 banco, 1 painel, N arquivos YAML**.
 Versao 2 do [yt-pub-livesx](../yt-pub-livesx) â€” mesmo trabalho (clips de lives, imports, TikTok â†’ YouTube),
@@ -94,4 +94,4 @@ Versao: `v2.0.0` (`lib/__init__.py`). Semver `vX.XX.YY`: minor carrega o patch; 
 
 ---
 
-Projeto adaptado da comunidade INEMA TDS - Marca Arckhe
+Projeto  - ARCKHÉe

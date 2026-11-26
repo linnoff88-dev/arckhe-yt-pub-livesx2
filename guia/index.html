@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>yt-pub-livesx2 — Publicador YouTube para N canais</title>
-<meta content="yt-pub-livesx2: 1 daemon, 1 banco, 1 painel e N canais em YAML para publicar clips no YouTube com fila de jobs, retry e aviso no Telegram. Versão 2 do yt-pub-livesx." name="description"/>
+<meta content="yt-pub-livesx2: 1 daemon, 1 banco, 1 painel e N canais em YAML para publicar clips no YouTube com fila de jobs, retry e aviso no Telegram. Versêo 2 do yt-pub-livesx." name="description"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet"/>
@@ -127,17 +127,17 @@
 <a class="btn ghost" href="https://github.com/inematds/yt-pub-livesx2" rel="noopener" target="_blank">Ver no GitHub</a>
 </div>
 </div>
-<figure><img alt="Ilustração do yt-pub-livesx2: um hub central distribuindo vídeos para vários canais" src="assets/hero.jpg"/></figure>
+<figure><img alt="Ilustraçêo do yt-pub-livesx2: um hub central distribuindo vídeos para vários canais" src="assets/hero.jpg"/></figure>
 </div>
 </header>
 <section id="oque"><div class="wrap">
 <span class="chip">O que é</span>
-<h2>A versão 2 do pipeline de lives do INEMA</h2>
-<p class="sub">O <a href="https://inematds.github.io/yt-pub-livesx/">yt-pub-livesx</a> corta lives em clips e republica em outro canal. Funcionou tão bem que virou 17 instâncias copiadas, 35 processos e 18 portas. A v2 mantém os scripts que fazem o trabalho e troca só a orquestração.</p>
+<h2>A versêo 2 do pipeline de lives do INEMA</h2>
+<p class="sub">O <a href="https://inematds.github.io/yt-pub-livesx/">yt-pub-livesx</a> corta lives em clips e republica em outro canal. Funcionou têo bem que virou 17 instâncias copiadas, 35 processos e 18 portas. A v2 mantém os scripts que fazem o trabalho e troca só a orquestraçêo.</p>
 <div class="grid g3">
-<div class="card"><h3>🧩 Um processo para todos os canais</h3><p>O <code>hub.py</code> lê <code>canais/*.yaml</code> a cada 30 s, agenda um job por horário e executa em ordem. Editar o YAML basta: não há restart.</p></div>
-<div class="card"><h3>🔐 Credenciais ficam onde estão</h3><p>Cada canal aponta <code>config_dir</code> para a pasta que já tem o OAuth. Nada é copiado, nada é migrado. Os 17 canais do v1 entram sem reautenticar.</p></div>
-<div class="card"><h3>🧾 Fila com estado, não relógio em string</h3><p>Jobs idempotentes por chave, claim atômico em SQLite, retry para falha transitória e recuperação se o processo morrer no meio de um upload.</p></div>
+<div class="card"><h3>🧩 Um processo para todos os canais</h3><p>O <code>hub.py</code> lê <code>canais/*.yaml</code> a cada 30 s, agenda um job por horário e executa em ordem. Editar o YAML basta: nêo há restart.</p></div>
+<div class="card"><h3>🔐 Credenciais ficam onde estêo</h3><p>Cada canal aponta <code>config_dir</code> para a pasta que já tem o OAuth. Nada é copiado, nada é migrado. Os 17 canais do v1 entram sem reautenticar.</p></div>
+<div class="card"><h3>🧾 Fila com estado, nêo relógio em string</h3><p>Jobs idempotentes por chave, claim atômico em SQLite, retry para falha transitória e recuperaçêo se o processo morrer no meio de um upload.</p></div>
 </div>
 <div style="margin-top:26px;overflow-x:auto">
 <table class="cmp">
@@ -147,7 +147,7 @@
 <tr><td>portas TCP</td><td>18</td><td class="v2">1</td></tr>
 <tr><td>bancos SQLite</td><td>17</td><td class="v2">1</td></tr>
 <tr><td>cópias do código</td><td>19</td><td class="v2">1</td></tr>
-<tr><td>linhas de orquestração</td><td>11.363</td><td class="v2">965</td></tr>
+<tr><td>linhas de orquestraçêo</td><td>11.363</td><td class="v2">965</td></tr>
 <tr><td>testes automatizados</td><td>0</td><td class="v2">15</td></tr>
 </tbody>
 </table>
@@ -167,9 +167,9 @@
 <span>Telegram</span>
 </div>
 <div class="grid g3" style="margin-top:26px">
-<div class="card"><div class="num">1</div><h3>Entrada</h3><p><code>./hub publicar</code>, ou copiar o arquivo para <code>entrada/&lt;canal&gt;/</code> com um <code>.json</code> opcional ao lado (título, descrição, tags, capa).</p></div>
-<div class="card"><div class="num">2</div><h3>Agendamento</h3><p>Para cada canal ativo e cada horário do YAML, um job <code>pub:&lt;canal&gt;:&lt;dia HH:MM&gt;</code>. Reiniciar o hub não dobra nem perde publicação.</p></div>
-<div class="card"><div class="num">3</div><h3>Publicação</h3><p>O <code>runner</code> é o único que publica. Falha de rede volta para a fila; OAuth recusado vira erro visível no painel e na CLI.</p></div>
+<div class="card"><div class="num">1</div><h3>Entrada</h3><p><code>./hub publicar</code>, ou copiar o arquivo para <code>entrada/&lt;canal&gt;/</code> com um <code>.json</code> opcional ao lado (título, descriçêo, tags, capa).</p></div>
+<div class="card"><div class="num">2</div><h3>Agendamento</h3><p>Para cada canal ativo e cada horário do YAML, um job <code>pub:&lt;canal&gt;:&lt;dia HH:MM&gt;</code>. Reiniciar o hub nêo dobra nem perde publicaçêo.</p></div>
+<div class="card"><div class="num">3</div><h3>Publicaçêo</h3><p>O <code>runner</code> é o único que publica. Falha de rede volta para a fila; OAuth recusado vira erro visível no painel e na CLI.</p></div>
 </div>
 </div></section>
 <section id="pre"><div class="wrap">
@@ -186,7 +186,7 @@
 </div></section>
 <section id="guia"><div class="wrap">
 <span class="chip">Guia de uso · passo a passo</span>
-<h2>Do clone à primeira publicação</h2>
+<h2>Do clone à primeira publicaçêo</h2>
 <p class="sub">Todos os comandos abaixo existem no repo e foram executados. Nenhum faz upload real até você pedir com <code>--agora</code>.</p>
 <div class="step"><div class="b">1</div><div>
 <h3>Clonar e instalar</h3>
@@ -220,7 +220,7 @@
 </div></div>
 <div class="step"><div class="b">6</div><div>
 <h3>Ou soltar na pasta de entrada</h3>
-<p>Mesmo efeito sem CLI, para n8n, scripts ou uma pessoa arrastando arquivos. Um <code>.json</code> com o mesmo nome traz título, descrição, tags e capa.</p>
+<p>Mesmo efeito sem CLI, para n8n, scripts ou uma pessoa arrastando arquivos. Um <code>.json</code> com o mesmo nome traz título, descriçêo, tags e capa.</p>
 <pre><span class="k">cp</span> video.mp4 video.json entrada/lives8/
 <span class="c"># video.json: {"titulo":"...","descricao":"...","tags":["a","b"],"privacy":"public"}</span></pre>
 </div></div>
@@ -243,7 +243,7 @@
 <section id="exemplos"><div class="wrap">
 <span class="chip">Exemplos</span>
 <h2>Saída real dos comandos</h2>
-<p class="sub">Capturas de texto da primeira execução, em 2026-09-06, contra as 17 instâncias v1.</p>
+<p class="sub">Capturas de texto da primeira execuçêo, em 2026-09-06, contra as 17 instâncias v1.</p>
 <div class="grid g2">
 <div class="card"><h3>./hub status</h3><pre>canal     destino        fila  public. erros  ultimo
 lives1    INEMA TDS         0     2413     0  2026-09-04 17:15
@@ -278,16 +278,16 @@ ativo: false   <span class="c"># true quando parar o yt-scheduler8</span></pre><
 <span class="chip">Roadmap</span>
 <h2>Fase 1 pronta, fase 2 desenhada</h2>
 <p class="sub">Teto: o núcleo fica abaixo de 1.500 linhas. O que passar disso vira script chamado por um job.</p>
-<div class="phase"><div class="tag">Feito</div><div class="d"><strong>Núcleo de publicação</strong><span>Daemon, fila de jobs, CLI, painel único, publisher YouTube com dry-run, pasta de entrada, Telegram, importador do v1, 15 testes.</span></div></div>
-<div class="phase"><div class="tag">Fase 2</div><div class="d"><strong>Corte de lives e thumbnail como jobs</strong><span>Os scripts <code>yt-clip</code> e <code>yt-thumbnail</code> do v1 já estão copiados; viram tipos de job <code>cortar_live</code> e <code>thumb</code> com <code>LIVES_DIR</code> por canal.</span></div></div>
-<div class="phase"><div class="tag">Fase 2</div><div class="d"><strong>Alerta de erro no Telegram</strong><span>Um chat de admin recebe OAuth recusado e upload com falha. É o que faltou no v1 para não descobrir 4 canais parados por acaso.</span></div></div>
-<div class="phase"><div class="tag">Fase 2</div><div class="d"><strong>TikTok e Instagram por agregador</strong><span>Publisher com a mesma assinatura do YouTube apontando para Upload-Post ou Blotato. Pesquisa e comparação em <code>docs/PUBLICADORES.md</code>.</span></div></div>
-<div class="phase"><div class="tag">Migração</div><div class="d"><strong>Canal a canal, sem big bang</strong><span>Parar o <code>yt-schedulerN</code>, trocar <code>ativo: true</code>, observar. As pastas v1 ficam como cofre de credenciais e de lives em disco.</span></div></div>
+<div class="phase"><div class="tag">Feito</div><div class="d"><strong>Núcleo de publicaçêo</strong><span>Daemon, fila de jobs, CLI, painel único, publisher YouTube com dry-run, pasta de entrada, Telegram, importador do v1, 15 testes.</span></div></div>
+<div class="phase"><div class="tag">Fase 2</div><div class="d"><strong>Corte de lives e thumbnail como jobs</strong><span>Os scripts <code>yt-clip</code> e <code>yt-thumbnail</code> do v1 já estêo copiados; viram tipos de job <code>cortar_live</code> e <code>thumb</code> com <code>LIVES_DIR</code> por canal.</span></div></div>
+<div class="phase"><div class="tag">Fase 2</div><div class="d"><strong>Alerta de erro no Telegram</strong><span>Um chat de admin recebe OAuth recusado e upload com falha. É o que faltou no v1 para nêo descobrir 4 canais parados por acaso.</span></div></div>
+<div class="phase"><div class="tag">Fase 2</div><div class="d"><strong>TikTok e Instagram por agregador</strong><span>Publisher com a mesma assinatura do YouTube apontando para Upload-Post ou Blotato. Pesquisa e comparaçêo em <code>docs/PUBLICADORES.md</code>.</span></div></div>
+<div class="phase"><div class="tag">Migraçêo</div><div class="d"><strong>Canal a canal, sem big bang</strong><span>Parar o <code>yt-schedulerN</code>, trocar <code>ativo: true</code>, observar. As pastas v1 ficam como cofre de credenciais e de lives em disco.</span></div></div>
 </div></section>
 <footer>
 <div class="wrap">
 <div class="pill">Python 3.12</div><div class="pill">SQLite WAL</div><div class="pill">YouTube Data API v3</div><div class="pill">YAML</div><div class="pill">systemd</div>
-<p style="margin-top:18px">yt-pub-livesx2 · projeto de pesquisa e educação do INEMA ·
+<p style="margin-top:18px">yt-pub-livesx2 · projeto de pesquisa e educaçêo do INEMA ·
       <a href="https://github.com/inematds/yt-pub-livesx2">inematds/yt-pub-livesx2</a> ·
       <a href="https://inema.club">INEMA.CLUB</a></p>
 </div>
